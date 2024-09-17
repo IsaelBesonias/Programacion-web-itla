@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\MSI ACCOUNT\\Desktop\\TareaWebBlazorServer-master\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\Tarea_Web1.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Tarea_Web1.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\MSI ACCOUNT\\Desktop\\TareaWebBlazorServer-master\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\MSI ACCOUNT\\Desktop\\TareaWebBlazorServer-master\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\MSI ACCOUNT\\Desktop\\TareaWebBlazorServer-master\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\MSI ACCOUNT\\Desktop\\TareaWebBlazorServer-master\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\MSI ACCOUNT\\Desktop\\TareaWebBlazorServer-master\\wwwroot\\images\\FotoMia.jpeg",
+      "PackagePath": "staticwebassets\\images\\FotoMia.jpeg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Tarea_Web1.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Tarea_Web1.props",
+      "PackagePath": "build\\Tarea_Web1.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Tarea_Web1.props",
+      "PackagePath": "buildMultiTargeting\\Tarea_Web1.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Tarea_Web1.props",
+      "PackagePath": "buildTransitive\\Tarea_Web1.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

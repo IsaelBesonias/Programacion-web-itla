@@ -1,0 +1,52 @@
+@page "/Aprendiendomas"
+
+<PageTitle>AprendiendoMás</PageTitle>
+
+<center>
+<h1>Aprende más con estos videos:</h1>
+</center>
+
+<div class="row">
+
+    @foreach (var Videos in Video){
+
+        <div class="cold-md-4">
+
+            <div class="card mb-3">
+            <img class="card-img-top" src="https://i.ytimg.com/vi/@Videos.URL/hqdefault.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@Videos.Titulo</h5>
+                        <p class="card-text">@Videos.Descripcion</p>
+                    </div>
+                    <div class="card-body">
+                        <a href="https://www.youtube.com/watch?v=@Videos.URL" target = "blank"
+                        class="card-link">Link hacia el video.</a>
+                    </div>
+        </div>
+        </div>
+    }
+
+
+</div>
+
+@code{
+
+    class Videos{
+        
+        public string Titulo { get; set; } = "";
+        public string URL { get; set; } = "";
+        public string Descripcion { get; set; } = "";
+    }
+
+    List<Videos> Video = new List<Videos>{
+
+        new Videos{Titulo = "Blazor Fundamentals Tutorial – Learn Blazor Step-by-Step", URL = "CpbRAWgFBRQ", Descripcion = "Aprender de manera sencilla los fundamentos esenciales de Blazor."},
+        new Videos{Titulo = "Blazor - ¿Qué es NUEVO en .NET 8? - NOVEDADES", URL = "hAFFyEUpQnA", Descripcion = "Detalla las nuevas funcionalidades de .NET 8, especificamente con la utilización de Blazor."},
+        new Videos{Titulo = "¿Cómo se compara Blazor con ASP.NET MVC?", URL = "KwXtrNqd3kA", Descripcion = "Compara el funcionamiento básico de ASP.NET MVC con el de Blazor, para así dejar en claro sus diferencias."},
+        new Videos{Titulo = "¿Qué diablos es Blazor? | ejemplo básico", URL = "ktDj2xD-H9s", Descripcion = "Proporciona información de lo que es Blazor de manera sencilla e intuitiva para los nuevos desarrolladores adentrándose a esta tecnología."},
+        new Videos{Titulo = "Blazor contra Angular, Vue.js y React", URL = "1HNrYmubNF4", Descripcion = "Comparativas de Blazor con frameworks de JS para determinar en cuales puntos fallan cada una, ventajas y desventajas de estos, etc."},
+    };
+
+
+
+}
