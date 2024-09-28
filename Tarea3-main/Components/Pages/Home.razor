@@ -1,0 +1,83 @@
+﻿@page "/"
+@rendermode InteractiveServer
+@inject IJSRuntime JSx
+@using System.Text.Json
+
+<PageTitle>Tarea3</PageTitle>
+
+<center>
+    <div class="container">
+    <div class="row text-center">
+        <div class="col">
+            <h3 class="my-4">Tarea3</h3>
+            <p class="font-weight-bold">En esta pagina veras todo lo que se pidio de tarea.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h5 class="card-title">Casos Registrados</h5>
+                    <p class="card-text display-4">@Registers.Count</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-secondary">
+                <div class="card-body">
+                    <h5 class="card-title">Vehículos Involucrados</h5>
+                    <p class="card-text display-4">@Registers.Sum(r => r.VehiculosInvolucrados)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-danger">
+                <div class="card-body">
+                    <h5 class="card-title">Muertos</h5>
+                    <p class="card-text display-4">@Registers.Sum(r => r.Muertos)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-warning">
+                <div class="card-body">
+                    <h5 class="card-title">Heridos</h5>
+                    <p class="card-text display-3">@Registers.Sum(r => r.Heridos)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <h5 class="card-title">Costos Estimados</h5>
+                    <p class="card-text display-4"><LabelMoney Valor="@Registers.Sum(r => r.CostoEstimado)" /></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+</center>
+@code {
+    List<Reporte> Registers = new List<Reporte>();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var RegistersJson = await JSx.InvokeAsync<string>("localStorage.getItem", "Registers");
+
+            if (RegistersJson != null)
+            {
+                Registers = JsonSerializer.Deserialize<List<Reporte>>(RegistersJson);
+
+                    StateHasChanged();
+            }
+        }
+    }
+}
