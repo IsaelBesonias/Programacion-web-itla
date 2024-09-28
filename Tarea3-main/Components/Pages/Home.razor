@@ -1,0 +1,51 @@
+﻿@page "/"
+@rendermode InteractiveServer
+@inject IJSRuntime JSx
+@using System.Text.Json
+
+<PageTitle>AccidentesYa</PageTitle>
+
+<center>
+    <h3>AccidentesYa</h3>
+    <b>
+        <p>En esta página encontrarás un dashboard de los accidentes activos y podrás registar accidentes de tráfico.</p>
+    </b>
+<div>
+    Cantidad de casos registrados: @Registers.Count 
+</div>
+
+<div>
+    Total de vehiculos involucrados: @Registers.Sum(r => r.VehiculosInvolucrados) 
+</div>
+
+<div>
+    Total de muertos: @Registers.Sum(r => r.Muertos)
+</div>
+
+<div>
+    Total de heridos: @Registers.Sum(r => r.Heridos)
+</div>
+
+<div>
+    Total de costos estimados: <LabelMoney Valor="@Registers.Sum(r => r.CostoEstimado)"  />
+</div>
+
+</center>
+@code {
+    List<Reporte> Registers = new List<Reporte>();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var RegistersJson = await JSx.InvokeAsync<string>("localStorage.getItem", "Registers");
+
+            if (RegistersJson != null)
+            {
+                Registers = JsonSerializer.Deserialize<List<Reporte>>(RegistersJson);
+
+                    StateHasChanged();
+            }
+        }
+    }
+}

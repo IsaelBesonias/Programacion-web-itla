@@ -1,0 +1,102 @@
+@page "/Register"
+@inject NavigationManager NavMan
+@rendermode InteractiveServer
+@using System.Text.Json
+@inject IJSRuntime JSx
+
+<PageTitle>Registrar</PageTitle>
+
+<center>
+<h3>Accidentes registrados</h3>
+
+<table class = "table table-hover table-bordered mb-4">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Descripción</th>
+            <th>Costo estimado</th>
+            <th>Comandos</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Register in Registers){
+
+            <tr>
+                <td>@Register.Fecha</td>
+                <td>
+                    @((Register.Descripcion.Length > 90) ? @Register.Descripcion.Substring(0, 50) + "..." : Register.Descripcion)
+                </td>
+                <td><LabelMoney Valor = "Register.CostoEstimado" />
+                </td>
+                <td>
+                    <button @onclick = "()=> EditarFila(Register)" class = "btn btn-info btn-sm">Editar</button>
+                    <button @onclick = "()=> EliminarFila(Register)" class = "btn btn-danger btn-sm">Borrar</button>
+                    <button @onclick = "()=> ImprimirAc(Register)" class = "btn btn-success btn-sm">Imprimir</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class = "text-end">
+<center>
+
+    <button class = "btn btn-primary" @onclick = "N_Registro">Registrar accidente</button>
+
+</center>
+</div>
+
+
+
+
+@code{
+
+    List<Reporte> Registers = new List<Reporte>();
+
+    private void ImprimirAc(Reporte Register){
+
+         JSx.InvokeVoidAsync("window.open", "Register/Imprimir/" + Register.ID, "_blank");
+    }
+
+    private void N_Registro(){
+
+        NavMan.NavigateTo("Register/nuevo");
+    }
+
+    private void EditarFila(Reporte Register){
+
+        NavMan.NavigateTo("Register/edit/" + Register.ID);
+    }
+
+    private async Task EliminarFila(Reporte Register){
+
+        var rs = await JSx.InvokeAsync<bool>("confirm", "¿Seguro de que quieres eliminar este accidente?");
+        if(rs){
+            Registers.Remove(Register);
+            JSx.InvokeVoidAsync("localStorage.setItem", "Registers", JsonSerializer.Serialize(Registers));
+            StateHasChanged();
+        }
+    }
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender){
+
+        if (firstRender){
+
+            //Accede al localStorage.
+            var Jsonregisters = await JSx.InvokeAsync<string>("localStorage.getItem", "Registers");
+
+            if (Jsonregisters != null){
+
+                Registers = JsonSerializer.Deserialize<List<Reporte>>(Jsonregisters);
+                StateHasChanged();
+            }
+        }
+    }
+}
+
+
+
+
+
+</center>
